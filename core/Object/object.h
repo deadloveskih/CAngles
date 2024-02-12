@@ -1,18 +1,21 @@
 struct Object{
-    struct Class *cls;
+    struct Class *_class;
 };
 
 struct Class{
-    struct Object *obj;
-    void *(*constructor)(struct Object *self);
+    struct Object *_object;
+    struct Object *super;
+    void *(*constructor)(struct Object *self, struct Object *super);
     void (*destructor)(struct Object *self);
     int (*hash)(struct Object *self);
     void (*toString)(struct Object *self);
+    int (*equals)(struct Object *self, struct Object *other);
 };
 
-void *constructor(struct Object *self);
-void destructor(struct Object *self);
-int hash(struct Object *self);
-void toString(struct Object *self);
+void *object_constructor(struct Object *self, struct Object *super);
+void object_destructor(struct Object *self);
+int object_hash(struct Object *self);
+void object_toString(struct Object *self);
+int object_equals(struct Object *self, struct Object *other);
 
-extern struct Class cls;
+extern struct Object _object;
