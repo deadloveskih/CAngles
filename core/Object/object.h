@@ -3,19 +3,19 @@ struct Object{
 };
 
 struct Class{
-    struct Object *_object;
-    struct Object *super;
-    void *(*constructor)(struct Object *self, struct Object *super);
-    void (*destructor)(struct Object *self);
-    int (*hash)(struct Object *self);
-    void (*toString)(struct Object *self);
-    int (*equals)(struct Object *self, struct Object *other);
+    void *_object;
+    struct Class *super;
+    void *(*constructor)(void *_self, void *_super, ...);
+    void (*destructor)(void *_self);
+    int (*hash)(void *_self);
+    void (*toString)(void *_self);
+    int (*equals)(void *_self, void *_other);
 };
 
-void *object_constructor(struct Object *self, struct Object *super);
-void object_destructor(struct Object *self);
-int object_hash(struct Object *self);
-void object_toString(struct Object *self);
-int object_equals(struct Object *self, struct Object *other);
+void *object_constructor(void *_self, void *_super, ...);
+void object_destructor(void *_self);
+int object_hash(void *_self);
+void object_toString(void *_self);
+int object_equals(void *_self, void *_other);
 
 extern struct Object _object;
