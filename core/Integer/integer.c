@@ -10,7 +10,7 @@ void *integer_constructor(void *_self, void *_super, ...){
     va_start(args, _super);
     struct Integer *self = (struct Integer *)_self;
     struct Class *super = (struct Class *)_super;
-    self = malloc(sizeof(struct Integer));
+    self = malloc(sizeof(struct Integer) + sizeof(self->_class->super));
     self->_class = malloc(sizeof(struct Class));
     self->_class->super = super;
     if(self->_class->super != 0){
@@ -32,13 +32,11 @@ void *integer_constructor(void *_self, void *_super, ...){
 void integer_destructor(void *_self){
     struct Integer *self = (struct Integer *)_self;
     self->_class->super->destructor(self);
-    free(self->_class);
-    free(self);
 }
 
 int integer_hash(void *_self){
     struct Integer *self = (struct Integer *)_self;
-    int hash = self->_class->super->hash(self->_class->super->_object);
+    int hash = self->_class->super->hash(self);
     return 31 * (uintptr_t)&(self->value) + hash;
 }
 
