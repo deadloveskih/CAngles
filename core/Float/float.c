@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <stdint.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include "../Object/object.h"
 #include "float.h"
 
@@ -10,7 +10,7 @@ void *float_constructor(void *_self, void *_super, ...){
     va_start(args, _super);
     struct Float *self = (struct Float *)_self;
     struct Class *super = (struct Class *)_super;
-    self = malloc(sizeof(struct Float) + sizeof(self->_class->super));
+    self = malloc(sizeof(struct Float));
     self->_class = malloc(sizeof(struct Class));
     self->_class->super = super;
     if(self->_class->super != 0){

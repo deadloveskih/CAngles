@@ -3,6 +3,7 @@
 #include "core/Object/object.h"
 #include "core/Integer/integer.h"
 #include "core/Float/float.h"
+#include "core/String/string.h"
 
 void *new_obj(struct Object *new){
     return _object._class->constructor(new, 0);
@@ -14,6 +15,10 @@ void *new_int(struct Integer *new, int value){
 
 void *new_float(struct Float *new, float value){
     return _float._class->constructor(new, _object._class, value);
+}
+
+void *new_string(struct String *new, char *value){
+    return _string._class->constructor(new, _object._class, value);
 }
 
 int main(void){
@@ -52,5 +57,17 @@ int main(void){
     x->_class->destructor(x);
     y->_class->destructor(y);
 
-    
+    printf("\n____________________________________\n");
+    struct String *o, *p;
+    o = (struct String *)new_string(o, "1asdf");
+    p = (struct String *)new_string(p, "5asdfa");
+    o->_class->toString(o);
+    p->_class->toString(p);
+    printf("%s\n", o->value);
+    printf("%s\n", p->value);
+    printf("\nfirst%d second%d\n", o->_class->equals(o, p), p->_class->equals(p, p));
+    struct String *conc = o->concat(o, p);
+    printf("%s", conc->value);
+    o->_class->destructor(o);
+    p->_class->destructor(p);
 }

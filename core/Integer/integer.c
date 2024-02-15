@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <stdint.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include "../Object/object.h"
 #include "integer.h"
 
@@ -10,7 +10,7 @@ void *integer_constructor(void *_self, void *_super, ...){
     va_start(args, _super);
     struct Integer *self = (struct Integer *)_self;
     struct Class *super = (struct Class *)_super;
-    self = malloc(sizeof(struct Integer) + sizeof(self->_class->super));
+    self = malloc(sizeof(struct Integer));
     self->_class = malloc(sizeof(struct Class));
     self->_class->super = super;
     if(self->_class->super != 0){
