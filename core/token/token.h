@@ -1,0 +1,31 @@
+struct Token{
+    char *word;
+    int position;
+};
+
+extern IMPORT;
+extern CLASS;
+extern FOR;
+extern WHILE;
+extern FOREACH;
+extern IF;
+extern ELSE;
+extern ELIF;
+extern C_BRACKET_O;
+extern C_BRACKET_C;
+extern S_BRACKET_O;
+extern S_BRACKET_C;
+extern BRACKET_O;
+extern BRACKET_C;
+extern POINT;
+extern PLUS;
+extern MINUS;
+extern MULTIPLY;
+extern DIVIDE;
+extern MODULO;
+extern EXPONENTIATION;
+extern SEMICOLON;
+extern COMMA;
+extern DEFINE;
+extern EQUALS;
+extern QUOTES;
