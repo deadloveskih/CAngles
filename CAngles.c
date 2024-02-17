@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "core/Object/object.h"
-#include "core/Integer/integer.h"
-#include "core/Float/float.h"
-#include "core/String/string.h"
+#include "core/builtin/types/Object/object.h"
+#include "core/builtin/types/Integer/integer.h"
+#include "core/builtin/types/Float/float.h"
+#include "core/builtin/types/String/string.h"
 
 void *new_obj(struct Object *new){
     return _object._class->constructor(new, 0);
