@@ -5,11 +5,11 @@ struct Object{
 struct Class{
     void *_object;
     struct Class *super;
-    void *(*constructor)(void *_self, void *_super, ...);
-    void (*destructor)(void *_self);
-    int (*hash)(void *_self);
-    void (*toString)(void *_self);
-    int (*equals)(void *_self, void *_other);
+    void *constructor;
+    void *destructor;
+    void *hash;
+    void *toString;
+    void *equals;
 };
 
 void *object_constructor(void *_self, void *_super, ...);

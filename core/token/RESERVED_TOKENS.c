@@ -26,3 +26,7 @@ struct Token COMMA = {",", 0};
 struct Token DEFINE = {"=", 0};
 struct Token EQUALS = {"==", 0};
 struct Token QUOTES = {"\"", 0};
+struct Token RETURN = {"return", 0};
+struct Token TRUE = {"True", 0};
+struct Token FALSE = {"False", 0};
+

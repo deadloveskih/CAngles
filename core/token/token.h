@@ -29,3 +29,6 @@ extern COMMA;
 extern DEFINE;
 extern EQUALS;
 extern QUOTES;
+extern RETURN;
+extern TRUE;
+extern FALSE;

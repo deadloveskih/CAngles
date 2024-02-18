@@ -17,7 +17,8 @@ void *string_constructor(void *_self, void *_super, ...){
     self->value = malloc(sizeof(char) * strlen(value));
     self->_class->super = super;
     if(self->_class->super != 0){
-        self->_class->super->constructor(self, super->super); //Maybe problem
+        void *(*super_constructor)(void *, void *, ...) = self->_class->super->constructor;
+        self->_class->super->_object = super_constructor(self->_class->super->_object, super->super); //Maybe problem
     }
     self->_class->_object = self;
     self->_class->constructor = &string_constructor;
@@ -33,12 +34,14 @@ void *string_constructor(void *_self, void *_super, ...){
 void string_destructor(void *_self){
     struct String *self = (struct String *)_self;
     free(self->value);
-    self->_class->super->destructor(self);
+    void (*destructor)() = self->_class->super->destructor;
+    destructor(self);
 }
 
 int string_hash(void *_self){
     struct String *self = (struct String *)_self;
-    int hash = self->_class->super->hash(self);
+    int (*hash_method)(void *) = self->_class->super->hash;
+    int hash = hash_method(self);
     return 31 * (uintptr_t)&(self->value) + hash;
 }
 

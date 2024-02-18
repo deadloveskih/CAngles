@@ -11,7 +11,8 @@ void *object_constructor(void *_self, void *_super, ...){
     self->_class = malloc(sizeof(struct Class));
     self->_class->super = super;
     if(self->_class->super != 0){
-        self->_class->super->constructor(self, super->super); //Maybe problem
+        void *(*super_constructor)(void *, void *, ...) = self->_class->super->constructor;
+        self->_class->super->_object = super_constructor(self->_class->super->_object, super->super); //Maybe problem
     }
     self->_class->_object = self;
     self->_class->constructor = &object_constructor;

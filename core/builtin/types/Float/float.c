@@ -14,14 +14,14 @@ void *float_constructor(void *_self, void *_super, ...){
     self->_class = malloc(sizeof(struct Class));
     self->_class->super = super;
     if(self->_class->super != 0){
-        self->_class->super->constructor(self, super->super); //Maybe problem
+        void *(*super_constructor)(void *, void *, ...) = self->_class->super->constructor;
+        self->_class->super->_object = super_constructor(self->_class->super->_object, super->super); //Maybe problem
     }
     self->_class->_object = self;
     self->_class->constructor = &float_constructor;
     self->_class->destructor = &float_destructor;
     self->_class->hash = &float_hash;
     self->_class->toString = &float_toString;
-    self->_class->equals = &float_equals;
 
     self->value = (float)va_arg(args, double);
     va_end(args);
@@ -31,12 +31,14 @@ void *float_constructor(void *_self, void *_super, ...){
 
 void float_destructor(void *_self){
     struct Float *self = (struct Float *)_self;
-    self->_class->super->destructor(self);
+    void (*destructor)() = self->_class->super->destructor;
+    destructor(self);
 }
 
 int float_hash(void *_self){
     struct Float *self = (struct Float *)_self;
-    int hash = self->_class->super->hash(self);
+    int (*hash_method)(void *) = self->_class->super->hash;
+    int hash = hash_method(self);
     return 31 * (uintptr_t)&(self->value) + hash;
 }
 
@@ -45,11 +47,5 @@ void float_toString(void *_self){
     printf("Float@%x, value: %f\n", self, self->value);
 }
 
-int float_equals(void *_self, void *_other){
-    struct Float *self = (struct Float *)_self;
-    struct Float *other = (struct Float *)_other;
-    return self->value == other->value;
-}
-
-struct Class _float_class = {0, (struct Class *)&_object._class, &float_constructor, &float_destructor, &float_hash, &float_toString, &float_equals};
+struct Class _float_class = {0, (struct Class *)&_object._class, &float_constructor, &float_destructor, &float_hash, &float_toString, &object_equals};
 struct Float _float = {&_float_class, 0};

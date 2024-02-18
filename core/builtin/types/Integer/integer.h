@@ -7,6 +7,5 @@ void *integer_constructor(void *_self, void *_super, ...);
 void integer_destructor(void *_self);
 int integer_hash(void *_self);
 void integer_toString(void *_self);
-int integer_equals(void *_self, void *_other);
 
 extern struct Integer _integer;
