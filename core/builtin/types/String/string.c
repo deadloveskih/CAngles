@@ -14,7 +14,7 @@ void *string_constructor(void *_self, void *_super, ...){
     struct Class *super = (struct Class *)_super;
     self = malloc(sizeof(struct String));
     self->_class = malloc(sizeof(struct Class));
-    self->value = malloc(sizeof(char) * strlen(value));
+    self->value = malloc(sizeof(char) * strlen(value) + 1);
     self->_class->super = super;
     if(self->_class->super != 0){
         void *(*super_constructor)(void *, void *, ...) = self->_class->super->constructor;
@@ -34,8 +34,8 @@ void *string_constructor(void *_self, void *_super, ...){
 void string_destructor(void *_self){
     struct String *self = (struct String *)_self;
     free(self->value);
-    void (*destructor)() = self->_class->super->destructor;
-    destructor(self);
+    void (*destructor)(void *) = self->_class->super->destructor;
+    destructor(self->_class->super->_object);
 }
 
 int string_hash(void *_self){
@@ -48,7 +48,7 @@ int string_hash(void *_self){
 int string_equals(void *_self, void *_other){
     struct String *self = (struct String *)_self;
     struct String *other = (struct String *)_other;
-    return strcmp(self->value, other->value);
+    return !strcmp(self->value, other->value);
 }
 
 struct String *concat(void *_self, void *_other){

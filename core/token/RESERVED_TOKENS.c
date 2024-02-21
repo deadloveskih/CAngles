@@ -1,5 +1,5 @@
 #include "token.h"
-
+/*
 struct Token IMPORT = {"import", 0};
 struct Token CLASS = {"class", 0};
 struct Token FOR = {"for", 0};
@@ -29,4 +29,4 @@ struct Token QUOTES = {"\"", 0};
 struct Token RETURN = {"return", 0};
 struct Token TRUE = {"True", 0};
 struct Token FALSE = {"False", 0};
-
+*/

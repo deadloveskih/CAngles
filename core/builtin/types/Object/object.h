@@ -1,5 +1,7 @@
 struct Object{
     struct Class *_class;
+    void *fields;
+    void *methods;
 };
 
 struct Class{

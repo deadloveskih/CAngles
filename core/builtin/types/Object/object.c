@@ -49,4 +49,4 @@ int object_equals(void *_self, void *_other){
 }
 
 struct Class _class = {0, 0, &object_constructor, &object_destructor, &object_hash, &object_toString, &object_equals};
-struct Object _object = {&_class};
+struct Object _object = {&_class, 0, 0};
