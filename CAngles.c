@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include "core/builtin/types/Object/object.h"
 #include "core/builtin/types/String/string.h"
-#include "core/parser/parser.h"
-#include "core/token/token.h"
 #include "core/parser/bufferize/bufferize.h"
 
 /*void *new_obj(struct Object *new){
